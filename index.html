@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albert Jeferson Hutagalung - Portfolio</title>
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --header-gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --nav-bg: #ffffff;
+            --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --footer-bg: #212529;
+            --footer-color: #ffffff;
+            --input-border: #ddd;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --text-color: #f0f0f0;
+            --card-bg: #16213e;
+            --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            --header-gradient: linear-gradient(135deg, #0f3460, #533483);
+            --nav-bg: #0f3460;
+            --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --footer-bg: #0f3460;
+            --footer-color: #f0f0f0;
+            --input-border: #2e4482;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--secondary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Section */
+        header {
+            background: var(--header-gradient);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-text {
+            max-width: 600px;
+        }
+        
+        .header-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .header-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7rem;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--nav-bg);
+            box-shadow: var(--nav-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        
+        .info-item span {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 120px;
+            display: inline-block;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(58, 134, 255, 0.1);
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Services/Skills Section */
+        .services {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        
+        [data-theme="dark"] .services {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        [data-theme="dark"] .project-img {
+            background-color: #0f3460;
+            color: #f0f0f0;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .project-tag {
+            background-color: rgba(131, 56, 236, 0.1);
+            color: var(--secondary);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.05), rgba(58, 134, 255, 0.05));
+        }
+        
+        [data-theme="dark"] .contact {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.5), rgba(83, 52, 131, 0.5));
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            margin-bottom: 40px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .social-link[href*="wa.me"] {
+            background-color: #25D366;
+        }
+        
+        .social-link[href*="wa.me"]:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Form */
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--input-border);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        /* Theme Switch */
+        .theme-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .theme-switch-track {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: #ccc;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        
+        .theme-switch-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f39c12;
+        }
+        
+        [data-theme="dark"] .theme-switch-track {
+            background-color: var(--primary);
+        }
+        
+        [data-theme="dark"] .theme-switch-thumb {
+            left: calc(100% - 22px);
+            color: #1a1a2e;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text {
+                margin-bottom: 40px;
+            }
+            
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .service-card {
+                text-align: center;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        /* Theme transition animation */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+        
+        .active-link::after {
+            width: 100% !important;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">Albert JH<span style="color: var(--primary)">.</span></a>
+            <div class="nav-links">
+                <a href="#home">Beranda</a>
+                <a href="#about">Tentang</a>
+                <a href="#skills">Keterampilan</a>
+                <a href="#projects">Proyek</a>
+                <a href="#contact">Kontak</a>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="theme-switch" id="themeSwitch">
+                    <div class="theme-switch-track">
+                        <div class="theme-switch-thumb">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header id="home">
+        <div class="container header-content">
+            <div class="header-text fade-in">
+                <h1>Albert Jeferson Hutagalung</h1>
+                <p>Berpikir data, bertindak cerdas, untuk masa depan yang lebih baik.</p>
+                <a href="#contact" class="btn">Hubungi Saya</a>
+            </div>
+            <div class="profile-img fade-in delay-1">
+                <div>AJ</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Saya</h2>
+            </div>
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <p>Saya adalah seorang mahasiswa Teknik Informatika angkatan 2022 yang bersemangat dalam pengembangan web dan pemrograman. Dengan keahlian dalam HTML, CSS, dan JavaScript, saya terus berusaha mengembangkan keterampilan saya untuk menjadi seorang profesional di bidang IT.</p>
+                    <p>Saya percaya bahwa kombinasi antara pemikiran analitis dan kreativitas dapat memecahkan berbagai permasalahan dalam dunia teknologi. Saya selalu bersemangat untuk belajar teknologi baru dan mengimplementasikannya dalam proyek-proyek yang saya kerjakan.</p>
+                    <div class="info-item">
+                        <span>Nama:</span> Albert Jeferson Hutagalung
+                    </div>
+                    <div class="info-item">
+                        <span>Pendidikan:</span> S1 Teknik Informatika (2022-sekarang)
+                    </div>
+                </div>
+                <div>
+                    <div class="info-item">
+                        <span>Email:</span> aljefhut@gmail.com
+                    </div>
+                    <div class="info-item">
+                        <span>WhatsApp:</span> +62 822-8344-1259
+                    </div>
+                    <h3>Keterampilan Teknis</h3>
+                    <div class="skills">
+                        <div class="skill-tag">HTML</div>
+                        <div class="skill-tag">CSS</div>
+                        <div class="skill-tag">JavaScript</div>
+                    </div>
+                    <h3 style="margin-top: 30px;">Soft Skills</h3>
+                    <div class="skills">
+                        <div class="skill-tag">Communication Skills</div>
+                        <div class="skill-tag">Problem Solving</div>
+                        <div class="skill-tag">Team Work</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Keterampilan</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML</h3>
+                    <p>Memiliki kemampuan dalam pembuatan struktur website dengan HTML5 yang modern, semantik, dan terorganisir dengan baik.</p>
+                </div>
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3>CSS</h3>
+                    <p>Mampu membuat tampilan website yang responsif, menarik, dan modern dengan menggunakan CSS untuk semua ukuran perangkat.</p>
+                </div>
+                <div class="service-card fade-in delay-2">
+                    <div class="service-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3>JavaScript</h3>
+                    <p>Dapat mengimplementasikan interaktivitas pada website dan fungsionalitas dinamis melalui JavaScript.</p>
+                </div>
+                <div class="service-card fade-in delay-3">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Communication Skills</h3>
+                    <p>Memiliki kemampuan komunikasi yang baik dalam menyampaikan ide, bekerja dalam tim, dan berkolaborasi dengan orang lain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proyek Saya</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Proyek Akhir Semester</h3>
+                        <p>Proyek website yang dikembangkan sebagai tugas akhir selama perkuliahan, menggabungkan HTML, CSS, dan JavaScript.</p>
+                        <div class="project-tags">
+                            <div class="project-tag">HTML</div>
+                            <div class="project-tag">CSS</div>
+                            <div class="project-tag">JavaScript</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in delay-1">
+                    <div class="project-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Website Responsif</h3>
+                        <p>Proyek pengembangan website dengan tampilan responsif untuk berbagai ukuran perangkat, dari desktop hingga mobile.</p>
+                        <div class="project-tags">
+                            <div class="project-tag">HTML</div>
+                            <div class="project-tag">CSS</div>
+                            <div class="project-tag">Responsive Design</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in delay-2">
+                    <div class="project-img">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Aplikasi Web Sederhana</h3>
+                        <p>Pengembangan aplikasi web sederhana dengan fungsionalitas dasar untuk kebutuhan pengguna umum.</p>
+                        <div class="project-tags">
+                            <div class="project-tag">HTML</div>
+                            <div class="project-tag">CSS</div>
+                            <div class="project-tag">JavaScript</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hubungi Saya</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Informasi Kontak</h3>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>aljefhut@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>LinkedIn</h4>
+                            <p><a href="https://www.linkedin.com/in/albert-jeferson-437a84256/" target="_blank">albert-jeferson-437a84256</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>WhatsApp</h4>
+                            <p><a href="https://wa.me/6282283441259" target="_blank">+62 822-8344-1259</a></p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/albert-jeferson-437a84256/" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:aljefhut@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/6282283441259" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form fade-in delay-1">
+                    <h3>Kirim Pesan</h3>
+                    <form>
+                        <div style="margin-bottom: 20px;">
+                            <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Nama</label>
+                            <input type="text" id="name">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500;">Email</label>
+                            <input type="email" id="email">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Pesan</label>
+                            <textarea id="message" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 Albert Jeferson Hutagalung. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const contactForm = document.querySelector('.contact-form form');
+        const sections = document.querySelectorAll('.section');
+        const projectCards = document.querySelectorAll('.project-card');
+        const skillTags = document.querySelectorAll('.skill-tag');
+        const themeSwitch = document.getElementById('themeSwitch');
+        
+        // Theme Switcher
+        themeSwitch.addEventListener('click', function() {
+            // Toggle theme
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Update body attribute
+            document.body.setAttribute('data-theme', newTheme);
+            
+            // Store user preference in localStorage
+            localStorage.setItem('theme', newTheme);
+            
+            // Update theme icon
+            const themeIcon = themeSwitch.querySelector('i');
+            if (newTheme === 'dark') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+        
+        // Load saved theme preference
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                // Apply saved theme
+                document.body.setAttribute('data-theme', savedTheme);
+                
+                // Update theme icon
+                const themeIcon = themeSwitch.querySelector('i');
+                if (savedTheme === 'dark') {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            } else {
+                // Check for system preference
+                const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+                if (prefersDarkScheme.matches) {
+                    document.body.setAttribute('data-theme', 'dark');
+                    const themeIcon = themeSwitch.querySelector('i');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            }
+        });
+
+        // Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    
+                    // Add staggered animation for child elements
+                    if (entry.target.classList.contains('projects-grid') || 
+                        entry.target.classList.contains('services-grid')) {
+                        const children = entry.target.children;
+                        Array.from(children).forEach((child, index) => {
+                            child.style.animationDelay = `${0.1 * index}s`;
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+        // Observe all sections and elements with fade-in class
+        document.querySelectorAll('.section, .fade-in').forEach(el => {
+            if (el.classList.contains('fade-in')) {
+                el.classList.remove('fade-in');
+            }
+            observer.observe(el);
+        });
+
+        // Mobile Menu Toggle with Animation
+        menuBtn.addEventListener('click', function() {
+            // Toggle active class
+            navLinks.classList.toggle('active');
+            
+            // Add slide-in animation for mobile menu
+            if (navLinks.classList.contains('active')) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'var(--card-bg)';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = 'var(--card-shadow)';
+                navLinks.style.borderRadius = '0 0 10px 10px';
+                navLinks.style.width = '200px';
+                navLinks.style.animation = 'slideIn 0.3s ease forwards';
+            } else {
+                navLinks.style.animation = 'slideOut 0.3s ease forwards';
+                setTimeout(() => {
+                    if (!navLinks.classList.contains('active')) {
+                        navLinks.style.display = '';
+                    }
+                }, 300);
+            }
+            
+            // Toggle menu icon
+            this.innerHTML = this.innerHTML.includes('fa-bars') ? 
+                '<i class="fas fa-times"></i>' : 
+                '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scrolling with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                if (navLinks.classList.contains('active')) {
+                    menuBtn.click();
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navHeight = document.querySelector('nav').offsetHeight;
+                
+                // Calculate position with offset
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Form Validation and Submission
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form fields
+                const nameField = document.getElementById('name');
+                const emailField = document.getElementById('email');
+                const messageField = document.getElementById('message');
+                
+                // Simple validation
+                let isValid = true;
+                
+                if (!nameField.value.trim()) {
+                    markInvalid(nameField, 'Nama tidak boleh kosong');
+                    isValid = false;
+                } else {
+                    markValid(nameField);
+                }
+                
+                if (!emailField.value.trim()) {
+                    markInvalid(emailField, 'Email tidak boleh kosong');
+                    isValid = false;
+                } else if (!isValidEmail(emailField.value)) {
+                    markInvalid(emailField, 'Format email tidak valid');
+                    isValid = false;
+                } else {
+                    markValid(emailField);
+                }
+                
+                if (!messageField.value.trim()) {
+                    markInvalid(messageField, 'Pesan tidak boleh kosong');
+                    isValid = false;
+                } else {
+                    markValid(messageField);
+                }
+                
+                // If form is valid, submit (in this demo just show success message)
+                if (isValid) {
+                    // Here you would normally send the data to a server
+                    
+                    // Show success message
+                    const successMsg = document.createElement('div');
+                    successMsg.textContent = 'Pesan berhasil dikirim! Terima kasih.';
+                    successMsg.style.backgroundColor = '#d4edda';
+                    successMsg.style.color = '#155724';
+                    successMsg.style.padding = '10px';
+                    successMsg.style.borderRadius = '5px';
+                    successMsg.style.marginBottom = '20px';
+                    
+                    // Insert at the top of the form
+                    contactForm.insertBefore(successMsg, contactForm.firstChild);
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Remove success message after 5 seconds
+                    setTimeout(() => {
+                        successMsg.remove();
+                    }, 5000);
+                }
+            });
+        }
+        
+        // Project card interactive effects
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Scale up slightly
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 20px 30px rgba(0, 0, 0, 0.15)';
+                
+                // Highlight the project tags
+                const tags = this.querySelectorAll('.project-tag');
+                tags.forEach(tag => {
+                    tag.style.backgroundColor = 'rgba(131, 56, 236, 0.2)';
+                });
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                // Reset styles
+                this.style.transform = '';
+                this.style.boxShadow = '';
+                
+                const tags = this.querySelectorAll('.project-tag');
+                tags.forEach(tag => {
+                    tag.style.backgroundColor = '';
+                });
+            });
+        });
+        
+        // Active navigation highlighting
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active-link');
+                    link.style.color = 'var(--primary)';
+                } else {
+                    link.style.color = '';
+                }
+            });
+        });
+        
+        // Skill tags hover effect
+        skillTags.forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+                this.style.backgroundColor = 'rgba(58, 134, 255, 0.2)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.backgroundColor = '';
+            });
+        });
+        
+        // Typing effect for header tagline
+        const tagline = document.querySelector('.header-text p');
+        const taglineText = tagline.textContent;
+        tagline.textContent = '';
+        
+        let index = 0;
+        function typeWriter() {
+            if (index < taglineText.length) {
+                tagline.textContent += taglineText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Start typing effect after a short delay
+        setTimeout(typeWriter, 500);
+        
+        // Add scroll to top button
+        const scrollTopBtn = document.createElement('button');
+        scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        scrollTopBtn.className = 'scroll-top-btn';
+        scrollTopBtn.style.position = 'fixed';
+        scrollTopBtn.style.bottom = '20px';
+        scrollTopBtn.style.right = '20px';
+        scrollTopBtn.style.width = '50px';
+        scrollTopBtn.style.height = '50px';
+        scrollTopBtn.style.borderRadius = '50%';
+        scrollTopBtn.style.backgroundColor = 'var(--primary)';
+        scrollTopBtn.style.color = 'white';
+        scrollTopBtn.style.border = 'none';
+        scrollTopBtn.style.cursor = 'pointer';
+        scrollTopBtn.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+        scrollTopBtn.style.display = 'none';
+        scrollTopBtn.style.zIndex = '999';
+        scrollTopBtn.style.transition = 'all 0.3s ease';
+        
+        document.body.appendChild(scrollTopBtn);
+        
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.style.display = 'block';
+                scrollTopBtn.style.opacity = '1';
+            } else {
+                scrollTopBtn.style.opacity = '0';
+                setTimeout(() => {
+                    if (window.pageYOffset <= 300) {
+                        scrollTopBtn.style.display = 'none';
+                    }
+                }, 300);
+            }
+        });
+        
+        // Scroll to top functionality
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Helper functions
+        function markInvalid(field, message) {
+            // Add red border
+            field.style.borderColor = '#dc3545';
+            
+            // Add error message
+            let errorMsg = field.nextElementSibling;
+            if (!errorMsg || !errorMsg.classList.contains('error-message')) {
+                errorMsg = document.createElement('div');
+                errorMsg.className = 'error-message';
+                errorMsg.style.color = '#dc3545';
+                errorMsg.style.fontSize = '0.8rem';
+                errorMsg.style.marginTop = '5px';
+                field.parentNode.insertBefore(errorMsg, field.nextSibling);
+            }
+            errorMsg.textContent = message;
+        }
+        
+        function markValid(field) {
+            // Reset border
+            field.style.borderColor = '';
+            
+            // Remove error message if exists
+            const errorMsg = field.nextElementSibling;
+            if (errorMsg && errorMsg.classList.contains('error-message')) {
+                errorMsg.remove();
+            }
+        }
+        
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    </script>
+</body>
+</html>
