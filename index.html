@@ -118,6 +118,15 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             color: white;
         }
+
+        .btn-cv {
+            background-color: #25D366;
+            margin-left: 15px;
+        }
+        
+        .btn-cv:hover {
+            background-color: #128C7E;
+        }
         
         .profile-img {
             width: 300px;
@@ -509,6 +518,17 @@
             .contact-content {
                 grid-template-columns: 1fr;
             }
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .btn-cv {
+                margin-left: 0;
+            }
         }
         
         @media (max-width: 768px) {
@@ -575,6 +595,12 @@
         .active-link::after {
             width: 100% !important;
         }
+
+        /* Button container for responsive layout */
+        .btn-container {
+            display: flex;
+            align-items: center;
+        }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -612,7 +638,12 @@
             <div class="header-text fade-in">
                 <h1>Albert Jeferson Hutagalung</h1>
                 <p>Tidak ada proses yang mudah untuk mendapatkan hasil yang indah, setiap proses pasti menemui kegagalan, dan setiap kegagalan merupakan langkah menuju kesuksesan.</p>
-                <a href="#contact" class="btn">Hubungi Saya</a>
+                <div class="btn-container">
+                    <a href="#contact" class="btn">Hubungi Saya</a>
+                    <a href="cv-albert-jeferson.pdf" download="CV-Albert-Jeferson-Hutagalung.pdf" class="btn btn-cv">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </div>
             </div>
             <div class="profile-img fade-in delay-1">
                 <img src="gambar/ifoto-ai_1746714625924.png" alt="Albert Jeferson Hutagalung" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
@@ -636,6 +667,9 @@
                     <div class="info-item">
                         <span>Pendidikan:</span> S1 Teknik Informatika (2022-sekarang)
                     </div>
+                    <a href="cv-albert-jeferson.pdf" download="CV-Albert-Jeferson-Hutagalung.pdf" class="btn" style="margin-top: 20px;">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
                 </div>
                 <div>
                     <div class="info-item">
