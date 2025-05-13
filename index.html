@@ -307,6 +307,164 @@
             font-size: 1.5rem;
         }
         
+        /* Certificates Section */
+        .certificates {
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.05), rgba(131, 56, 236, 0.05));
+        }
+        
+        [data-theme="dark"] .certificates {
+            background: linear-gradient(135deg, rgba(15, 52, 96, 0.3), rgba(83, 52, 131, 0.3));
+        }
+        
+        .certificates-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            gap: 15px;
+        }
+        
+        .certificate-tab {
+            padding: 10px 20px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            font-weight: 500;
+        }
+        
+        .certificate-tab:hover, .certificate-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .certificate-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+            display: none;
+        }
+        
+        .certificate-card.show {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certificate-img {
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .certificate-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .certificate-card:hover .certificate-overlay {
+            opacity: 1;
+        }
+        
+        .certificate-card:hover .certificate-img img {
+            transform: scale(1.1);
+        }
+        
+        .certificate-content {
+            padding: 20px;
+        }
+        
+        .certificate-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .certificate-content p {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .certificate-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] .certificate-meta {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        
+        .certificate-source {
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        
+        .certificate-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .certificate-link:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
         /* Projects Section */
         .projects-grid {
             display: grid;
@@ -552,6 +710,10 @@
                 text-align: center;
             }
             
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .section {
                 padding: 70px 0;
             }
@@ -609,6 +771,41 @@
             display: flex;
             align-items: center;
         }
+        
+        /* Tooltip Styles */
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        .tooltip:hover::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: var(--dark) transparent transparent;
+            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
+        }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -622,6 +819,7 @@
                 <a href="#home">Beranda</a>
                 <a href="#about">Tentang</a>
                 <a href="#skills">Keterampilan</a>
+                <a href="#certificates">Sertifikat</a>
                 <a href="#projects">Proyek</a>
                 <a href="#contact">Kontak</a>
             </div>
@@ -691,6 +889,11 @@
                         <div class="skill-tag">HTML</div>
                         <div class="skill-tag">CSS</div>
                         <div class="skill-tag">JavaScript</div>
+                        <div class="skill-tag">PHP</div>
+                        <div class="skill-tag">Node.js</div>
+                        <div class="skill-tag">MySQL</div>
+                        <div class="skill-tag">Git</div>
+                        <div class="skill-tag">C#</div>
                     </div>
                     <h3 style="margin-top: 30px;">Soft Skills</h3>
                     <div class="skills">
@@ -731,12 +934,424 @@
                     <h3>JavaScript</h3>
                     <p>Dapat mengimplementasikan interaktivitas pada website dan fungsionalitas dinamis melalui JavaScript.</p>
                 </div>
-                <div class="service-card fade-in delay-3">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <h3>PHP</h3>
+                    <p>Memiliki pengetahuan dalam pengembangan aplikasi web dengan PHP dan MySQL untuk membuat solusi back-end yang handal.</p>
+                </div>
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Node.js</h3>
+                    <p>Mampu mengembangkan aplikasi server-side dengan Node.js dan menggunakan framework modern untuk membangun RESTful API.</p>
+                </div>
+                <div class="service-card fade-in delay-2">
                     <div class="service-icon">
                         <i class="fas fa-comments"></i>
                     </div>
                     <h3>Communication Skills</h3>
                     <p>Memiliki kemampuan komunikasi yang baik dalam menyampaikan ide, bekerja dalam tim, dan berkolaborasi dengan orang lain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section certificates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sertifikat</h2>
+            </div>
+            
+            <div class="certificates-tabs">
+                <div class="certificate-tab active" data-filter="all">Semua</div>
+                <div class="certificate-tab" data-filter="webdev">Web Development</div>
+                <div class="certificate-tab" data-filter="programming">Programming</div>
+                <div class="certificate-tab" data-filter="design">Design</div>
+                <div class="certificate-tab" data-filter="finance">Finance</div>
+            </div>
+            
+            <div class="certificates-grid">
+                <!-- Web Development Certificates -->
+                <div class="certificate-card show" data-category="webdev">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="HTML Hero Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/4EXGVJKDQXRL" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Dasar Pemrograman Web</h3>
+                        <p>Mempelajari dasar HTML dan CSS untuk membuat halaman web yang responsif dan modern.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                4 Maret 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="webdev">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="HTML Hero Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/6RPNRE398X2M" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Membuat Front-End Web untuk Pemula</h3>
+                        <p>Mempelajari DOM, Event, dan Web Storage untuk membuat aplikasi web interaktif.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                12 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="webdev">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Fundamental Front-End Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/53XEDRV7VPRN" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Fundamental Front-End Web Development</h3>
+                        <p>Mempelajari teknik layouting, web component, dan asynchronous JavaScript.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                12 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="webdev">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="HTML Hero Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-5b5f101d-f0a6-441d-bea2-ee075a969a49" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Become HTML Hero</h3>
+                        <p>Menguasai seluruh aspek HTML untuk membuat struktur website yang optimal dan semantik.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="webdev">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Web Design Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-32833544-655c-4256-bb98-c025d7a321d8" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Web Design: Building Stunning Websites on Smartphones</h3>
+                        <p>Mempelajari teknik desain web responsif untuk pengalaman mobile yang optimal.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Programming Certificates -->
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="JavaScript Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/2VX3K9873XYQ" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Dasar Pemrograman JavaScript</h3>
+                        <p>Mempelajari fundamental JavaScript termasuk sintaksis, fungsi, dan asynchronous programming.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                11 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Node.js Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-d9733d6a-ddc7-46e9-82e4-987c446e49de" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Node.js: All You Need to Know with Practical Project</h3>
+                        <p>Mempelajari pengembangan aplikasi back-end dengan Node.js termasuk membuat RESTful API.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Back-End Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/81P2LR9WYZOY" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Back-End Pemula dengan JavaScript</h3>
+                        <p>Mempelajari pengembangan back-end dengan Node.js dan Hapi framework.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                11 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="PHP Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-2f9c8933-74db-448c-8621-38acb221f485" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>PHP for Beginners: Build Complete Ecommerce Store</h3>
+                        <p>Mempelajari PHP dan MySQL untuk membangun aplikasi e-commerce yang lengkap.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="PHP MySQL Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-c9a85ec4-5584-4369-85c9-491ad4dbe92b" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>PHP with MySQL: Build 5 PHP and MySQL Projects</h3>
+                        <p>Menguasai PHP dan MySQL melalui 5 proyek nyata untuk pengembangan web dinamis.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                8 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="C# Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-fe75530a-bada-4191-815c-8bc31dc809e7" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Getting Started with C#</h3>
+                        <p>Mempelajari dasar-dasar pemrograman C# untuk pengembangan aplikasi desktop dan web.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Git Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/81P2LNLRYZOY" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Dasar Git dengan GitHub</h3>
+                        <p>Mempelajari version control dengan Git dan GitHub untuk kolaborasi pengembangan software.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                17 Februari 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Programming Logic Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/0LZ0R6RE3P65" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Pengenalan ke Logika Pemrograman</h3>
+                        <p>Mempelajari dasar-dasar logika pemrograman dan computational thinking.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                17 Februari 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card show" data-category="programming">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Software Development Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/EYX4G01M6ZDL" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h3>
+                        <p>Mempelajari dasar-dasar pengembangan software termasuk kebutuhan aplikasi dan dokumentasi.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                14 Februari 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Office & Tools Certificates -->
+                <div class="certificate-card show" data-category="office">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Excel Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-fc73949b-ae23-433a-919d-784a131a3018" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Microsoft Excel - Beginner to Advance with Example</h3>
+                        <p>Mempelajari Microsoft Excel dari tingkat dasar hingga lanjutan dengan studi kasus.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Certificates -->
+                <div class="certificate-card show" data-category="design">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="CorelDRAW Certificate">
+                        <div class="certificate-overlay">
+                            <a href="https://ude.my/UC-321fd36c-066c-4452-a6c0-65c484963f14" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>CorelDRAW Graphic Design Mastery: From Zero to Hero</h3>
+                        <p>Mempelajari desain grafis menggunakan CorelDRAW untuk berbagai kebutuhan visual.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                13 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Udemy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Finance Certificates -->
+                <div class="certificate-card show" data-category="finance">
+                    <div class="certificate-img">
+                        <img src="/api/placeholder/400/220" alt="Financial Literacy Certificate">
+                        <div class="certificate-overlay">
+                            <a href="dicoding.com/certificates/L4PQEVDO2PO1" target="_blank" class="btn">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Financial Literacy 101</h3>
+                        <p>Mempelajari dasar-dasar literasi keuangan dan strategi investasi untuk masa depan.</p>
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i>
+                                11 Mei 2025
+                            </div>
+                            <div class="certificate-source">
+                                <span>Dicoding</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -788,6 +1403,34 @@
                             <div class="project-tag">HTML</div>
                             <div class="project-tag">CSS</div>
                             <div class="project-tag">JavaScript</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in delay-1">
+                    <div class="project-img">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Toko Online</h3>
+                        <p>Pengembangan website e-commerce dengan fitur keranjang belanja, checkout, dan sistem pembayaran.</p>
+                        <div class="project-tags">
+                            <div class="project-tag">PHP</div>
+                            <div class="project-tag">MySQL</div>
+                            <div class="project-tag">JavaScript</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in delay-2">
+                    <div class="project-img">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>REST API</h3>
+                        <p>Pengembangan RESTful API untuk aplikasi manajemen data menggunakan Node.js dan Express.</p>
+                        <div class="project-tags">
+                            <div class="project-tag">Node.js</div>
+                            <div class="project-tag">Express</div>
+                            <div class="project-tag">MongoDB</div>
                         </div>
                     </div>
                 </div>
@@ -893,6 +1536,37 @@
         const projectCards = document.querySelectorAll('.project-card');
         const skillTags = document.querySelectorAll('.skill-tag');
         const themeSwitch = document.getElementById('themeSwitch');
+        const certificateTabs = document.querySelectorAll('.certificate-tab');
+        const certificateCards = document.querySelectorAll('.certificate-card');
+        
+        // Certificate Filtering
+        certificateTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                certificateTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Get filter value
+                const filter = this.getAttribute('data-filter');
+                
+                // Filter certificates
+                certificateCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    
+                    // Hide all cards first
+                    card.classList.remove('show');
+                    
+                    // Show cards based on filter
+                    if (filter === 'all' || category === filter) {
+                        setTimeout(() => {
+                            card.classList.add('show');
+                        }, 100);
+                    }
+                });
+            });
+        });
         
         // Theme Switcher
         themeSwitch.addEventListener('click', function() {
@@ -951,7 +1625,8 @@
                     
                     // Add staggered animation for child elements
                     if (entry.target.classList.contains('projects-grid') || 
-                        entry.target.classList.contains('services-grid')) {
+                        entry.target.classList.contains('services-grid') ||
+                        entry.target.classList.contains('certificates-grid')) {
                         const children = entry.target.children;
                         Array.from(children).forEach((child, index) => {
                             child.style.animationDelay = `${0.1 * index}s`;
