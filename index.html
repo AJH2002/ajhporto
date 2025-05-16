@@ -393,10 +393,12 @@
             overflow: hidden;
             background-color: var(--card-bg);
             box-shadow: var(--card-shadow);
-            transition: var(--transition);
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .certificate-card:hover {
@@ -708,6 +710,93 @@
             display: flex;
             align-items: center;
         }
+
+        /* Certificate Filter Styles */
+        .certificate-filter {
+            display: flex;
+            justify-content: center;
+            margin: 0 0 40px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 30px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Animation for certificate cards */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(58, 134, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOutUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* Additional styles for certificate filtering */
+        .certificates-grid {
+            min-height: 200px;
+            transition: height 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Scroll to top button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .scroll-top-btn {
+            animation: bounce 2s infinite;
+        }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -900,6 +989,14 @@
         <div class="container">
             <div class="section-title">
                 <h2>Sertifikat</h2>
+            </div>
+            <!-- Certificate Filter - Added directly into HTML -->
+            <div class="certificate-filter">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="dicoding">Dicoding</button>
+                <button class="filter-btn" data-filter="udemy">Udemy</button>
+                <button class="filter-btn" data-filter="frontend">Front-End</button>
+                <button class="filter-btn" data-filter="backend">Back-End</button>
             </div>
             <div class="certificates-grid">
                 <div class="certificate-card fade-in">
@@ -1366,129 +1463,115 @@
             });
         }
         
-        // Create certificate filter
-        function createCertificateFilter() {
+        // Initialize certificate filter - IMPROVED FUNCTION
+        function initializeCertificateFilter() {
             if (!certificatesSection) return;
             
-            // Create filter container
-            const filterContainer = document.createElement('div');
-            filterContainer.className = 'certificate-filter';
-            filterContainer.style.display = 'flex';
-            filterContainer.style.justifyContent = 'center';
-            filterContainer.style.margin = '0 0 40px 0';
-            filterContainer.style.flexWrap = 'wrap';
-            filterContainer.style.gap = '10px';
+            // Get filter buttons that are now in the HTML
+            const filterButtons = document.querySelectorAll('.filter-btn');
             
-            // Create filter buttons
-            const filters = [
-                { name: 'all', label: 'Semua' },
-                { name: 'dicoding', label: 'Dicoding' },
-                { name: 'udemy', label: 'Udemy' },
-                { name: 'frontend', label: 'Front-End' },
-                { name: 'backend', label: 'Back-End' },
-            ];
-            
-            filters.forEach(filter => {
-                const button = document.createElement('button');
-                button.textContent = filter.label;
-                button.dataset.filter = filter.name;
-                button.className = filter.name === 'all' ? 'filter-btn active' : 'filter-btn';
-                button.style.padding = '8px 15px';
-                button.style.border = 'none';
-                button.style.borderRadius = '30px';
-                button.style.backgroundColor = filter.name === 'all' ? 'var(--primary)' : 'var(--card-bg)';
-                button.style.color = filter.name === 'all' ? 'white' : 'var(--text-color)';
-                button.style.fontWeight = '500';
-                button.style.cursor = 'pointer';
-                button.style.transition = 'all 0.3s ease';
-                button.style.boxShadow = 'var(--card-shadow)';
-                
-                // Add click event
+            // Add click event to each button
+            filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     // Update active button
                     document.querySelectorAll('.filter-btn').forEach(btn => {
                         btn.classList.remove('active');
-                        btn.style.backgroundColor = 'var(--card-bg)';
-                        btn.style.color = 'var(--text-color)';
                     });
                     this.classList.add('active');
-                    this.style.backgroundColor = 'var(--primary)';
-                    this.style.color = 'white';
                     
                     // Filter certificates
                     filterCertificates(this.dataset.filter);
                 });
-                
-                filterContainer.appendChild(button);
             });
             
-            // Add filter container to the DOM
-            const certificatesTitle = certificatesSection.querySelector('.section-title');
-            certificatesSection.insertBefore(filterContainer, certificatesTitle.nextSibling);
-            
-            // Add data attributes to certificate cards
+            // Add data attributes to certificate cards with proper categories
             const certificateCards = document.querySelectorAll('.certificate-card');
             certificateCards.forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
-                
-                // Default categories
-                card.dataset.category = '';
+                const categories = [];
                 
                 // Add platform category
                 if (title.includes('html hero') || 
                     title.includes('web design') || 
                     title.includes('php with mysql')) {
-                    card.dataset.category += ' udemy';
+                    categories.push('udemy');
                 } else {
-                    card.dataset.category += ' dicoding';
+                    categories.push('dicoding');
                 }
                 
                 // Add technology category
                 if (title.includes('front-end') || 
+                    title.includes('front end') || 
                     title.includes('html') || 
                     title.includes('web design') ||
                     title.includes('css')) {
-                    card.dataset.category += ' frontend';
+                    categories.push('frontend');
                 }
                 
                 if (title.includes('back-end') || 
+                    title.includes('back end') || 
                     title.includes('php') || 
                     title.includes('mysql')) {
-                    card.dataset.category += ' backend';
+                    categories.push('backend');
+                }
+                
+                // Set data-category attribute with proper spacing
+                card.dataset.category = categories.join(' ');
+                
+                // Ensure all cards are visible at start
+                card.style.display = '';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Filter certificates - IMPROVED FUNCTION
+        function filterCertificates(filter) {
+            const cards = document.querySelectorAll('.certificate-card');
+            
+            cards.forEach(card => {
+                // Handle the 'all' filter case
+                if (filter === 'all') {
+                    // Show all cards with animation
+                    showCard(card);
+                } else {
+                    // Check if card has the selected category
+                    const categories = card.dataset.category.split(' ');
+                    
+                    if (categories.includes(filter)) {
+                        showCard(card);
+                    } else {
+                        hideCard(card);
+                    }
                 }
             });
         }
         
-        // Filter certificates
-        function filterCertificates(filter) {
-            const cards = document.querySelectorAll('.certificate-card');
-            const grid = document.querySelector('.certificates-grid');
-            
-            // Add animation class to grid
-            grid.classList.add('filtering');
-            
-            setTimeout(() => {
-                cards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category.includes(filter)) {
-                        card.style.display = '';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 50);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
-                });
-                
-                // Remove animation class
+        // Helper function to show a card with animation
+        function showCard(card) {
+            // Make sure the card is displayed first
+            if (card.style.display === 'none') {
+                card.style.display = '';
+                // Small delay to allow the display property to take effect
                 setTimeout(() => {
-                    grid.classList.remove('filtering');
-                }, 350);
-            }, 100);
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }
+        }
+        
+        // Helper function to hide a card with animation
+        function hideCard(card) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            // After the animation completes, hide the card
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 300);
         }
         
         // Add counter section
@@ -1505,7 +1588,6 @@
             // Add counter items
             const counters = [
                 { icon: 'fas fa-certificate', count: 12, label: 'Sertifikat' },
-                { icon: 'fas fa-code', count: 300, label: 'Jam Belajar' },
                 { icon: 'fas fa-laptop-code', count: 15, label: 'Proyek' },
                 { icon: 'fas fa-user-graduate', count: 5, label: 'Teknologi Dikuasai' }
             ];
@@ -1687,14 +1769,17 @@
             // Initialize particles
             initParticles();
             
-            // Add certificate filter
-            createCertificateFilter();
+            // Initialize certificate filter
+            initializeCertificateFilter();
             
             // Add counter section
             addCounterSection();
             
             // Add 3D tilt effect
             add3DTiltEffect();
+            
+            // Enhance navbar
+            enhanceNavbar();
         });
 
         // Animation on Scroll
@@ -1726,38 +1811,152 @@
             observer.observe(el);
         });
 
-        // Mobile Menu Toggle with Animation
-        menuBtn.addEventListener('click', function() {
-            // Toggle active class
-            navLinks.classList.toggle('active');
+        // Enhanced Navbar Functionality
+        function enhanceNavbar() {
+            const nav = document.querySelector('nav');
+            const navHeight = nav.offsetHeight;
             
-            // Add slide-in animation for mobile menu
-            if (navLinks.classList.contains('active')) {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '80px';
-                navLinks.style.right = '0';
-                navLinks.style.backgroundColor = 'var(--card-bg)';
-                navLinks.style.padding = '20px';
-                navLinks.style.boxShadow = 'var(--card-shadow)';
-                navLinks.style.borderRadius = '0 0 10px 10px';
-                navLinks.style.width = '200px';
-                navLinks.style.animation = 'slideIn 0.3s ease forwards';
-            } else {
-                navLinks.style.animation = 'slideOut 0.3s ease forwards';
-                setTimeout(() => {
-                    if (!navLinks.classList.contains('active')) {
-                        navLinks.style.display = '';
+            // Shrink navbar on scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    nav.classList.add('navbar-scrolled');
+                    nav.style.padding = '10px 0';
+                    nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                } else {
+                    nav.classList.remove('navbar-scrolled');
+                    nav.style.padding = '20px 0';
+                    nav.style.boxShadow = 'var(--nav-shadow)';
+                }
+            });
+            
+            // Active link highlighting with scroll spy
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            // Add click event to all nav links for smooth scrolling
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the target section
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        // Calculate scroll position accounting for fixed navbar
+                        const targetPosition = targetSection.offsetTop - navHeight;
+                        
+                        // Scroll to the target
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL hash without scrolling
+                        history.pushState(null, null, targetId);
+                        
+                        // Close mobile menu if open
+                        if (navLinks.classList.contains('active')) {
+                            menuBtn.click();
+                        }
+                        
+                        // Update active nav link
+                        navLinks.forEach(navLink => navLink.classList.remove('active-link'));
+                        this.classList.add('active-link');
                     }
-                }, 300);
-            }
+                });
+            });
             
-            // Toggle menu icon
-            this.innerHTML = this.innerHTML.includes('fa-bars') ? 
-                '<i class="fas fa-times"></i>' : 
-                '<i class="fas fa-bars"></i>';
-        });
+            // Scroll spy to highlight current section in navbar
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY + navHeight + 100;
+                
+                // Find the current section
+                document.querySelectorAll('section').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (sectionId && scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        // Remove active class from all links
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-link');
+                        });
+                        
+                        // Add active class to current section link
+                        const currentLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+                        if (currentLink) {
+                            currentLink.classList.add('active-link');
+                        }
+                    }
+                });
+            });
+            
+            // Mobile menu toggle with animation and accessibility
+            if (menuBtn) {
+                menuBtn.setAttribute('aria-label', 'Toggle navigation menu');
+                menuBtn.setAttribute('role', 'button');
+                menuBtn.setAttribute('tabindex', '0');
+                
+                menuBtn.addEventListener('click', function() {
+                    const navLinks = document.querySelector('.nav-links');
+                    
+                    // Toggle menu visibility
+                    navLinks.classList.toggle('active');
+                    
+                    // Update ARIA attributes
+                    const expanded = navLinks.classList.contains('active');
+                    this.setAttribute('aria-expanded', expanded);
+                    
+                    // Toggle menu icon
+                    this.innerHTML = expanded ? 
+                        '<i class="fas fa-times"></i>' : 
+                        '<i class="fas fa-bars"></i>';
+                    
+                    // Apply slide animation
+                    if (expanded) {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = `${navHeight}px`;
+                        navLinks.style.right = '0';
+                        navLinks.style.backgroundColor = 'var(--card-bg)';
+                        navLinks.style.padding = '20px';
+                        navLinks.style.boxShadow = 'var(--card-shadow)';
+                        navLinks.style.borderRadius = '0 0 10px 10px';
+                        navLinks.style.width = '200px';
+                        navLinks.style.animation = 'slideIn 0.3s ease forwards';
+                        navLinks.style.zIndex = '1000';
+                    } else {
+                        navLinks.style.animation = 'slideOut 0.3s ease forwards';
+                        setTimeout(() => {
+                            if (!navLinks.classList.contains('active')) {
+                                navLinks.style.display = '';
+                            }
+                        }, 300);
+                    }
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    const navLinks = document.querySelector('.nav-links');
+                    if (navLinks.classList.contains('active') && 
+                        !navLinks.contains(e.target) && 
+                        e.target !== menuBtn && 
+                        !menuBtn.contains(e.target)) {
+                        
+                        menuBtn.click();
+                    }
+                });
+                
+                // Add keyboard accessibility
+                menuBtn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            }
+        }
 
         // Smooth Scrolling with offset for fixed header
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1957,86 +2156,10 @@
             });
         });
         
-        // Add CSS for pulse animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0.4); }
-                70% { box-shadow: 0 0 0 10px rgba(58, 134, 255, 0); }
-                100% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0); }
-            }
-            
-            .pulse {
-                animation: pulse 1.5s infinite;
-            }
-            
-            @keyframes fadeInDown {
-                0% { opacity: 0; transform: translateY(-20px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            
-            @keyframes fadeOutUp {
-                0% { opacity: 1; transform: translateY(0); }
-                100% { opacity: 0; transform: translateY(-20px); }
-            }
-            
-            .certificates-grid.filtering {
-                transition: height 0.3s ease;
-            }
-            
-            .certificate-card {
-                transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Typing effect for header tagline
-        const tagline = document.querySelector('.header-text p');
-        const taglineText = tagline.textContent;
-        tagline.textContent = '';
-        
-        let index = 0;
-        function typeWriter() {
-            if (index < taglineText.length) {
-                tagline.textContent += taglineText.charAt(index);
-                index++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        
-        // Start typing effect after a short delay
-        setTimeout(typeWriter, 500);
-        
         // Add scroll to top button with bounce animation
         const scrollTopBtn = document.createElement('button');
         scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
         scrollTopBtn.className = 'scroll-top-btn';
-        scrollTopBtn.style.position = 'fixed';
-        scrollTopBtn.style.bottom = '20px';
-        scrollTopBtn.style.right = '20px';
-        scrollTopBtn.style.width = '50px';
-        scrollTopBtn.style.height = '50px';
-        scrollTopBtn.style.borderRadius = '50%';
-        scrollTopBtn.style.backgroundColor = 'var(--primary)';
-        scrollTopBtn.style.color = 'white';
-        scrollTopBtn.style.border = 'none';
-        scrollTopBtn.style.cursor = 'pointer';
-        scrollTopBtn.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
-        scrollTopBtn.style.display = 'none';
-        scrollTopBtn.style.zIndex = '999';
-        scrollTopBtn.style.transition = 'all 0.3s ease';
-        scrollTopBtn.style.animation = 'bounce 2s infinite';
-        
-        // Add animation for bounce
-        const bounceStyle = document.createElement('style');
-        bounceStyle.textContent = `
-            @keyframes bounce {
-                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-                40% { transform: translateY(-10px); }
-                60% { transform: translateY(-5px); }
-            }
-        `;
-        document.head.appendChild(bounceStyle);
         
         document.body.appendChild(scrollTopBtn);
         
@@ -2078,17 +2201,6 @@
                 errorMsg.style.marginTop = '5px';
                 errorMsg.style.animation = 'shake 0.5s';
                 field.parentNode.insertBefore(errorMsg, field.nextSibling);
-                
-                // Add shake animation
-                const shakeStyle = document.createElement('style');
-                shakeStyle.textContent = `
-                    @keyframes shake {
-                        0%, 100% { transform: translateX(0); }
-                        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                        20%, 40%, 60%, 80% { transform: translateX(5px); }
-                    }
-                `;
-                document.head.appendChild(shakeStyle);
             }
             errorMsg.textContent = message;
         }
@@ -2108,6 +2220,23 @@
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return regex.test(email);
         }
+        
+        // Typing effect for header tagline
+        const tagline = document.querySelector('.header-text p');
+        const taglineText = tagline.textContent;
+        tagline.textContent = '';
+        
+        let index = 0;
+        function typeWriter() {
+            if (index < taglineText.length) {
+                tagline.textContent += taglineText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Start typing effect after a short delay
+        setTimeout(typeWriter, 500);
     </script>
 </body>
 </html>
