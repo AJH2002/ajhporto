@@ -50,6 +50,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
         }
         
         a {
@@ -302,6 +303,11 @@
             margin-bottom: 20px;
         }
         
+        /* Added Udemy Certificate Icon Style */
+        .fab.fa-php {
+            color: #777BB3;
+        }
+        
         .service-card h3 {
             margin-bottom: 15px;
             font-size: 1.5rem;
@@ -442,6 +448,22 @@
             width: 100%;
             text-align: center;
             margin-top: auto;
+        }
+        
+        /* Udemy Certificate Specific Styles */
+        .certificate-card .fab.fa-html5 {
+            color: #E44D26;
+            font-size: 3rem;
+        }
+        
+        .certificate-card .fas.fa-mobile-alt {
+            color: #48A9A6;
+            font-size: 2.5rem;
+        }
+        
+        .certificate-card .fab.fa-php {
+            color: #777BB3;
+            font-size: 3rem;
         }
         
         /* Contact Section */
@@ -1165,6 +1187,9 @@
         </div>
     </footer>
 
+    <!-- Particles.js for Header Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
         // DOM Elements
         const menuBtn = document.querySelector('.menu-btn');
@@ -1174,6 +1199,7 @@
         const projectCards = document.querySelectorAll('.project-card');
         const skillTags = document.querySelectorAll('.skill-tag');
         const themeSwitch = document.getElementById('themeSwitch');
+        const certificatesSection = document.getElementById('certificates');
         
         // Theme Switcher
         themeSwitch.addEventListener('click', function() {
@@ -1192,11 +1218,446 @@
             if (newTheme === 'dark') {
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
+                
+                // Update particles color for dark theme
+                if (window.pJSDom && window.pJSDom[0]) {
+                    window.pJSDom[0].pJS.particles.color.value = '#ffffff';
+                    window.pJSDom[0].pJS.particles.line_linked.color = '#ffffff';
+                    window.pJSDom[0].pJS.fn.particlesRefresh();
+                }
             } else {
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
+                
+                // Update particles color for light theme
+                if (window.pJSDom && window.pJSDom[0]) {
+                    window.pJSDom[0].pJS.particles.color.value = '#3a86ff';
+                    window.pJSDom[0].pJS.particles.line_linked.color = '#3a86ff';
+                    window.pJSDom[0].pJS.fn.particlesRefresh();
+                }
             }
         });
+        
+        // Initialize particles.js for header background
+        function initParticles() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const particleColor = currentTheme === 'dark' ? '#ffffff' : '#3a86ff';
+            
+            // Create particles container
+            const particlesContainer = document.createElement('div');
+            particlesContainer.id = 'particles-js';
+            particlesContainer.style.position = 'absolute';
+            particlesContainer.style.top = '0';
+            particlesContainer.style.left = '0';
+            particlesContainer.style.width = '100%';
+            particlesContainer.style.height = '100%';
+            particlesContainer.style.zIndex = '1';
+            
+            // Append to header
+            const header = document.querySelector('header');
+            header.style.position = 'relative';
+            header.insertBefore(particlesContainer, header.firstChild);
+            
+            // Initialize particles
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": particleColor
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": particleColor,
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+        
+        // Create certificate filter
+        function createCertificateFilter() {
+            if (!certificatesSection) return;
+            
+            // Create filter container
+            const filterContainer = document.createElement('div');
+            filterContainer.className = 'certificate-filter';
+            filterContainer.style.display = 'flex';
+            filterContainer.style.justifyContent = 'center';
+            filterContainer.style.margin = '0 0 40px 0';
+            filterContainer.style.flexWrap = 'wrap';
+            filterContainer.style.gap = '10px';
+            
+            // Create filter buttons
+            const filters = [
+                { name: 'all', label: 'Semua' },
+                { name: 'dicoding', label: 'Dicoding' },
+                { name: 'udemy', label: 'Udemy' },
+                { name: 'frontend', label: 'Front-End' },
+                { name: 'backend', label: 'Back-End' },
+            ];
+            
+            filters.forEach(filter => {
+                const button = document.createElement('button');
+                button.textContent = filter.label;
+                button.dataset.filter = filter.name;
+                button.className = filter.name === 'all' ? 'filter-btn active' : 'filter-btn';
+                button.style.padding = '8px 15px';
+                button.style.border = 'none';
+                button.style.borderRadius = '30px';
+                button.style.backgroundColor = filter.name === 'all' ? 'var(--primary)' : 'var(--card-bg)';
+                button.style.color = filter.name === 'all' ? 'white' : 'var(--text-color)';
+                button.style.fontWeight = '500';
+                button.style.cursor = 'pointer';
+                button.style.transition = 'all 0.3s ease';
+                button.style.boxShadow = 'var(--card-shadow)';
+                
+                // Add click event
+                button.addEventListener('click', function() {
+                    // Update active button
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.style.backgroundColor = 'var(--card-bg)';
+                        btn.style.color = 'var(--text-color)';
+                    });
+                    this.classList.add('active');
+                    this.style.backgroundColor = 'var(--primary)';
+                    this.style.color = 'white';
+                    
+                    // Filter certificates
+                    filterCertificates(this.dataset.filter);
+                });
+                
+                filterContainer.appendChild(button);
+            });
+            
+            // Add filter container to the DOM
+            const certificatesTitle = certificatesSection.querySelector('.section-title');
+            certificatesSection.insertBefore(filterContainer, certificatesTitle.nextSibling);
+            
+            // Add data attributes to certificate cards
+            const certificateCards = document.querySelectorAll('.certificate-card');
+            certificateCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                
+                // Default categories
+                card.dataset.category = '';
+                
+                // Add platform category
+                if (title.includes('html hero') || 
+                    title.includes('web design') || 
+                    title.includes('php with mysql')) {
+                    card.dataset.category += ' udemy';
+                } else {
+                    card.dataset.category += ' dicoding';
+                }
+                
+                // Add technology category
+                if (title.includes('front-end') || 
+                    title.includes('html') || 
+                    title.includes('web design') ||
+                    title.includes('css')) {
+                    card.dataset.category += ' frontend';
+                }
+                
+                if (title.includes('back-end') || 
+                    title.includes('php') || 
+                    title.includes('mysql')) {
+                    card.dataset.category += ' backend';
+                }
+            });
+        }
+        
+        // Filter certificates
+        function filterCertificates(filter) {
+            const cards = document.querySelectorAll('.certificate-card');
+            const grid = document.querySelector('.certificates-grid');
+            
+            // Add animation class to grid
+            grid.classList.add('filtering');
+            
+            setTimeout(() => {
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category.includes(filter)) {
+                        card.style.display = '';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+                
+                // Remove animation class
+                setTimeout(() => {
+                    grid.classList.remove('filtering');
+                }, 350);
+            }, 100);
+        }
+        
+        // Add counter section
+        function addCounterSection() {
+            // Create counter section
+            const counterSection = document.createElement('div');
+            counterSection.className = 'counter-section';
+            counterSection.style.padding = '60px 0';
+            counterSection.style.backgroundColor = 'var(--primary)';
+            counterSection.style.color = 'white';
+            counterSection.style.position = 'relative';
+            counterSection.style.overflow = 'hidden';
+            
+            // Add counter items
+            const counters = [
+                { icon: 'fas fa-certificate', count: 12, label: 'Sertifikat' },
+                { icon: 'fas fa-code', count: 300, label: 'Jam Belajar' },
+                { icon: 'fas fa-laptop-code', count: 15, label: 'Proyek' },
+                { icon: 'fas fa-user-graduate', count: 5, label: 'Teknologi Dikuasai' }
+            ];
+            
+            // Create container
+            const container = document.createElement('div');
+            container.className = 'container';
+            container.style.display = 'flex';
+            container.style.justifyContent = 'space-around';
+            container.style.flexWrap = 'wrap';
+            container.style.gap = '30px';
+            
+            counters.forEach(counter => {
+                const counterItem = document.createElement('div');
+                counterItem.className = 'counter-item';
+                counterItem.style.textAlign = 'center';
+                counterItem.style.padding = '20px';
+                
+                // Add icon
+                const icon = document.createElement('i');
+                icon.className = counter.icon;
+                icon.style.fontSize = '3rem';
+                icon.style.marginBottom = '15px';
+                icon.style.display = 'block';
+                
+                // Add counter
+                const count = document.createElement('div');
+                count.className = 'counter-value';
+                count.dataset.count = counter.count;
+                count.textContent = '0';
+                count.style.fontSize = '2.5rem';
+                count.style.fontWeight = 'bold';
+                count.style.marginBottom = '5px';
+                
+                // Add label
+                const label = document.createElement('div');
+                label.className = 'counter-label';
+                label.textContent = counter.label;
+                label.style.fontSize = '1.2rem';
+                
+                // Append elements
+                counterItem.appendChild(icon);
+                counterItem.appendChild(count);
+                counterItem.appendChild(label);
+                container.appendChild(counterItem);
+            });
+            
+            counterSection.appendChild(container);
+            
+            // Insert counter section after the skills section
+            const skillsSection = document.getElementById('skills');
+            skillsSection.parentNode.insertBefore(counterSection, skillsSection.nextSibling);
+            
+            // Initialize counter
+            initCounter();
+        }
+        
+        // Counter initialization
+        function initCounter() {
+            const counterSection = document.querySelector('.counter-section');
+            if (!counterSection) return;
+            
+            const counters = document.querySelectorAll('.counter-value');
+            let started = false;
+            
+            function startCounter() {
+                if (started) return;
+                
+                counters.forEach(counter => {
+                    const target = parseInt(counter.dataset.count);
+                    let count = 0;
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 15); // Update every 15ms
+                    
+                    const timer = setInterval(() => {
+                        count += increment;
+                        counter.textContent = Math.floor(count);
+                        
+                        if (count >= target) {
+                            counter.textContent = target;
+                            clearInterval(timer);
+                        }
+                    }, 15);
+                });
+                
+                started = true;
+            }
+            
+            // Use Intersection Observer to start counter when in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCounter();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(counterSection);
+        }
+        
+        // 3D Tilt effect for certificate cards
+        function add3DTiltEffect() {
+            const cards = document.querySelectorAll('.certificate-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    
+                    // Calculate cursor position relative to card center
+                    const mouseX = e.clientX - cardCenterX;
+                    const mouseY = e.clientY - cardCenterY;
+                    
+                    // Calculate tilt angle (max 10 degrees)
+                    const tiltX = (mouseY / (cardRect.height / 2)) * 10;
+                    const tiltY = -(mouseX / (cardRect.width / 2)) * 10;
+                    
+                    // Apply the transforms
+                    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.05, 1.05, 1.05)`;
+                    
+                    // Add shine effect
+                    const shine = card.querySelector('.shine') || (() => {
+                        const s = document.createElement('div');
+                        s.className = 'shine';
+                        s.style.position = 'absolute';
+                        s.style.top = '0';
+                        s.style.left = '0';
+                        s.style.right = '0';
+                        s.style.bottom = '0';
+                        s.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%)';
+                        s.style.zIndex = '1';
+                        s.style.borderRadius = '15px';
+                        s.style.pointerEvents = 'none';
+                        card.appendChild(s);
+                        return s;
+                    })();
+                    
+                    // Update shine position
+                    const shineX = (mouseX / cardRect.width) * 100 + 50;
+                    const shineY = (mouseY / cardRect.height) * 100 + 50;
+                    shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    // Reset transforms
+                    card.style.transform = '';
+                    const shine = card.querySelector('.shine');
+                    if (shine) shine.style.background = 'none';
+                });
+            });
+        }
         
         // Load saved theme preference
         window.addEventListener('DOMContentLoaded', function() {
@@ -1222,6 +1683,18 @@
                     themeIcon.classList.add('fa-moon');
                 }
             }
+            
+            // Initialize particles
+            initParticles();
+            
+            // Add certificate filter
+            createCertificateFilter();
+            
+            // Add counter section
+            addCounterSection();
+            
+            // Add 3D tilt effect
+            add3DTiltEffect();
         });
 
         // Animation on Scroll
@@ -1236,7 +1709,9 @@
                         entry.target.classList.contains('certificates-grid')) {
                         const children = entry.target.children;
                         Array.from(children).forEach((child, index) => {
-                            child.style.animationDelay = `${0.1 * index}s`;
+                            if (child.style.display !== 'none') { // Skip hidden elements
+                                child.style.animationDelay = `${0.1 * index}s`;
+                            }
                         });
                     }
                 }
@@ -1358,6 +1833,15 @@
                     successMsg.style.borderRadius = '5px';
                     successMsg.style.marginBottom = '20px';
                     
+                    // Add success icon
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-check-circle';
+                    icon.style.marginRight = '10px';
+                    successMsg.prepend(icon);
+                    
+                    // Add success animation
+                    successMsg.style.animation = 'fadeInDown 0.5s forwards';
+                    
                     // Insert at the top of the form
                     contactForm.insertBefore(successMsg, contactForm.firstChild);
                     
@@ -1366,13 +1850,16 @@
                     
                     // Remove success message after 5 seconds
                     setTimeout(() => {
-                        successMsg.remove();
+                        successMsg.style.animation = 'fadeOutUp 0.5s forwards';
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 500);
                     }, 5000);
                 }
             });
         }
         
-        // Project card interactive effects
+        // Project card interactive effects with parallax
         projectCards.forEach(card => {
             card.addEventListener('mouseenter', function() {
                 // Scale up slightly
@@ -1384,6 +1871,9 @@
                 tags.forEach(tag => {
                     tag.style.backgroundColor = 'rgba(131, 56, 236, 0.2)';
                 });
+                
+                // Add mouse move parallax effect
+                this.addEventListener('mousemove', handleProjectCardMouseMove);
             });
             
             card.addEventListener('mouseleave', function() {
@@ -1395,26 +1885,40 @@
                 tags.forEach(tag => {
                     tag.style.backgroundColor = '';
                 });
+                
+                // Remove mouse move event
+                this.removeEventListener('mousemove', handleProjectCardMouseMove);
             });
         });
         
-        // Certificate card interactive effects
-        const certificateCards = document.querySelectorAll('.certificate-card');
-        certificateCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                // Scale up slightly
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-                this.style.boxShadow = '0 20px 30px rgba(0, 0, 0, 0.15)';
-            });
+        // Project card mouse move handler
+        function handleProjectCardMouseMove(e) {
+            const card = this;
+            const cardRect = card.getBoundingClientRect();
+            const cardWidth = cardRect.width;
+            const cardHeight = cardRect.height;
             
-            card.addEventListener('mouseleave', function() {
-                // Reset styles
-                this.style.transform = '';
-                this.style.boxShadow = '';
-            });
-        });
+            // Calculate mouse position relative to card
+            const mouseX = e.clientX - cardRect.left;
+            const mouseY = e.clientY - cardRect.top;
+            
+            // Calculate rotation based on mouse position
+            const rotateY = ((mouseX / cardWidth) - 0.5) * 5; // -2.5 to 2.5 degrees
+            const rotateX = ((mouseY / cardHeight) - 0.5) * -5; // -2.5 to 2.5 degrees
+            
+            // Apply transform
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+            
+            // Parallax effect for project image
+            const img = card.querySelector('.project-img');
+            if (img) {
+                const moveX = ((mouseX / cardWidth) - 0.5) * 10; // -5 to 5 pixels
+                const moveY = ((mouseY / cardHeight) - 0.5) * 10; // -5 to 5 pixels
+                img.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
+            }
+        }
         
-        // Active navigation highlighting
+        // Active navigation highlighting with smooth transition
         window.addEventListener('scroll', function() {
             let current = '';
             
@@ -1428,27 +1932,63 @@
             
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.classList.remove('active-link');
+                link.style.color = '';
+                
                 if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active-link');
+                    link.style.transition = 'color 0.3s ease';
                     link.style.color = 'var(--primary)';
-                } else {
-                    link.style.color = '';
                 }
             });
         });
         
-        // Skill tags hover effect
+        // Skill tags hover effect with pulse animation
         skillTags.forEach(tag => {
             tag.addEventListener('mouseenter', function() {
                 this.style.transform = 'scale(1.1)';
                 this.style.backgroundColor = 'rgba(58, 134, 255, 0.2)';
+                this.classList.add('pulse');
             });
             
             tag.addEventListener('mouseleave', function() {
                 this.style.transform = '';
                 this.style.backgroundColor = '';
+                this.classList.remove('pulse');
             });
         });
+        
+        // Add CSS for pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0.4); }
+                70% { box-shadow: 0 0 0 10px rgba(58, 134, 255, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0); }
+            }
+            
+            .pulse {
+                animation: pulse 1.5s infinite;
+            }
+            
+            @keyframes fadeInDown {
+                0% { opacity: 0; transform: translateY(-20px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+            
+            @keyframes fadeOutUp {
+                0% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(-20px); }
+            }
+            
+            .certificates-grid.filtering {
+                transition: height 0.3s ease;
+            }
+            
+            .certificate-card {
+                transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
         
         // Typing effect for header tagline
         const tagline = document.querySelector('.header-text p');
@@ -1467,7 +2007,7 @@
         // Start typing effect after a short delay
         setTimeout(typeWriter, 500);
         
-        // Add scroll to top button
+        // Add scroll to top button with bounce animation
         const scrollTopBtn = document.createElement('button');
         scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
         scrollTopBtn.className = 'scroll-top-btn';
@@ -1485,6 +2025,18 @@
         scrollTopBtn.style.display = 'none';
         scrollTopBtn.style.zIndex = '999';
         scrollTopBtn.style.transition = 'all 0.3s ease';
+        scrollTopBtn.style.animation = 'bounce 2s infinite';
+        
+        // Add animation for bounce
+        const bounceStyle = document.createElement('style');
+        bounceStyle.textContent = `
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-10px); }
+                60% { transform: translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(bounceStyle);
         
         document.body.appendChild(scrollTopBtn);
         
@@ -1516,7 +2068,7 @@
             // Add red border
             field.style.borderColor = '#dc3545';
             
-            // Add error message
+            // Add error message with shake animation
             let errorMsg = field.nextElementSibling;
             if (!errorMsg || !errorMsg.classList.contains('error-message')) {
                 errorMsg = document.createElement('div');
@@ -1524,7 +2076,19 @@
                 errorMsg.style.color = '#dc3545';
                 errorMsg.style.fontSize = '0.8rem';
                 errorMsg.style.marginTop = '5px';
+                errorMsg.style.animation = 'shake 0.5s';
                 field.parentNode.insertBefore(errorMsg, field.nextSibling);
+                
+                // Add shake animation
+                const shakeStyle = document.createElement('style');
+                shakeStyle.textContent = `
+                    @keyframes shake {
+                        0%, 100% { transform: translateX(0); }
+                        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                        20%, 40%, 60%, 80% { transform: translateX(5px); }
+                    }
+                `;
+                document.head.appendChild(shakeStyle);
             }
             errorMsg.textContent = message;
         }
