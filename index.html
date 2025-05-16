@@ -367,6 +367,83 @@
             font-size: 0.8rem;
         }
         
+        /* Certificates Section */
+        .certificates {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        
+        [data-theme="dark"] .certificates {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .certificate-card {
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certificate-img {
+            height: 160px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        [data-theme="dark"] .certificate-img {
+            background-color: #0f3460;
+            color: #f0f0f0;
+        }
+        
+        .certificate-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .certificate-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .certificate-footer {
+            margin-top: auto;
+            padding-top: 15px;
+        }
+        
+        .certificate-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .btn-certificate {
+            background-color: var(--primary);
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+        
         /* Contact Section */
         .contact {
             background: linear-gradient(135deg, rgba(131, 56, 236, 0.05), rgba(58, 134, 255, 0.05));
@@ -623,6 +700,7 @@
                 <a href="#about">Tentang</a>
                 <a href="#skills">Keterampilan</a>
                 <a href="#projects">Proyek</a>
+                <a href="#certificates">Sertifikat</a>
                 <a href="#contact">Kontak</a>
             </div>
             <div style="display: flex; align-items: center; gap: 20px;">
@@ -795,6 +873,209 @@
         </div>
     </section>
 
+    <!-- Certificates Section -->
+    <section id="certificates" class="section certificates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sertifikat</h2>
+            </div>
+            <div class="certificates-grid">
+                <div class="certificate-card fade-in">
+                    <div class="certificate-img">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Financial Literacy 101</h3>
+                        <p>Kelas tentang literasi finansial yang mengajarkan konsep pengelolaan keuangan dan investasi.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/L4PQEVDO2PO1" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in delay-1">
+                    <div class="certificate-img">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Back-End Pemula dengan JavaScript</h3>
+                        <p>Kelas pengembangan back-end dengan JavaScript menggunakan Node.js dan framework Hapi.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/81P2LR9WYZOY" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in delay-2">
+                    <div class="certificate-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Fundamental Front-End Web Development</h3>
+                        <p>Kelas untuk pengembangan website dengan teknologi modern menggunakan JavaScript ES6, Web Component dan Module Bundler.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/53XEDRV7VPRN" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in">
+                    <div class="certificate-img">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Membuat Front-End Web untuk Pemula</h3>
+                        <p>Kelas yang mengajarkan dasar-dasar front-end web development termasuk DOM, Event, dan Web Storage.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/6RPNRE398X2M" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in delay-1">
+                    <div class="certificate-img">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Dasar Pemrograman JavaScript</h3>
+                        <p>Kelas yang mengajarkan konsep dasar JavaScript termasuk function, object, array, dan asynchronous programming.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/2VX3K9873XYQ" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in delay-2">
+                    <div class="certificate-img">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Dasar Pemrograman Web</h3>
+                        <p>Kelas yang mengajarkan dasar-dasar HTML, CSS, dan JavaScript untuk pengembangan web.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Maret 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/4EXGVJKDQXRL" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in">
+                    <div class="certificate-img">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Belajar Dasar Git dengan GitHub</h3>
+                        <p>Kelas yang mengajarkan dasar-dasar Git dan penggunaan GitHub untuk kolaborasi developer.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Februari 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/81P2LNLRYZOY" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in delay-1">
+                    <div class="certificate-img">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Pengenalan ke Logika Pemrograman</h3>
+                        <p>Kelas yang mengajarkan dasar-dasar logika pemrograman dan computational thinking.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Februari 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/0LZ0R6RE3P65" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in delay-2">
+                    <div class="certificate-img">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h3>
+                        <p>Kelas yang mengajarkan dasar-dasar pemrograman untuk pengembangan perangkat lunak.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Februari 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/EYX4G01M6ZDL" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Udemy Certificates -->
+                <div class="certificate-card fade-in">
+                    <div class="certificate-img">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Become HTML Hero</h3>
+                        <p>Kursus Udemy tentang HTML yang mengajarkan cara membuat struktur website modern dengan penerapan praktik terbaik.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://ude.my/UC-5b5f101d-f0a6-441d-bea2-ee075a969a49" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card fade-in delay-1">
+                    <div class="certificate-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Web Design: Building Stunning Websites on Smartphones</h3>
+                        <p>Kursus Udemy tentang desain responsif untuk perangkat mobile dengan fokus pada pengalaman pengguna.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://ude.my/UC-32833544-655c-4256-bb98-c025d7a321d8" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-card fade-in delay-2">
+                    <div class="certificate-img">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>PHP with MySQL: Build 5 PHP and MySQL Projects</h3>
+                        <p>Kursus Udemy tentang pengembangan aplikasi web dinamis menggunakan PHP dan MySQL dengan 5 proyek praktis.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Mei 2025
+                            </div>
+                            <a href="https://ude.my/UC-c9a85ec4-5584-4369-85c9-491ad4dbe92b" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="section contact">
         <div class="container">
@@ -951,7 +1232,8 @@
                     
                     // Add staggered animation for child elements
                     if (entry.target.classList.contains('projects-grid') || 
-                        entry.target.classList.contains('services-grid')) {
+                        entry.target.classList.contains('services-grid') ||
+                        entry.target.classList.contains('certificates-grid')) {
                         const children = entry.target.children;
                         Array.from(children).forEach((child, index) => {
                             child.style.animationDelay = `${0.1 * index}s`;
@@ -1113,6 +1395,22 @@
                 tags.forEach(tag => {
                     tag.style.backgroundColor = '';
                 });
+            });
+        });
+        
+        // Certificate card interactive effects
+        const certificateCards = document.querySelectorAll('.certificate-card');
+        certificateCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Scale up slightly
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 20px 30px rgba(0, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                // Reset styles
+                this.style.transform = '';
+                this.style.boxShadow = '';
             });
         });
         
