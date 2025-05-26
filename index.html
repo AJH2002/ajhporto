@@ -595,11 +595,6 @@
             transform: scale(1.1) rotateY(180deg);
         }
         
-        /* Added Udemy Certificate Icon Style */
-        .fab.fa-php {
-            color: #777BB3;
-        }
-        
         .service-card h3 {
             margin-bottom: 15px;
             font-size: 1.5rem;
@@ -950,6 +945,12 @@
         .certificate-card .fab.fa-php {
             color: #777BB3;
             font-size: 3rem;
+        }
+        
+        /* Project card gamepad icon */
+        .project-card .fas.fa-gamepad {
+            color: #00A8E8;
+            font-size: 2.5rem;
         }
         
         /* Certificate Filter Styles */
@@ -1524,8 +1525,20 @@
                 display: none;
             }
             
+            .nav-links.active {
+                display: flex !important;
+            }
+            
             .menu-btn {
                 display: block;
+                z-index: 1001;
+                position: relative;
+            }
+            
+            .menu-btn:hover {
+                background-color: rgba(58, 134, 255, 0.1);
+                border-radius: 5px;
+                padding: 5px;
             }
             
             .service-card {
@@ -1543,6 +1556,64 @@
             .profile-img {
                 width: 250px;
                 height: 250px;
+            }
+            
+            .nav-container {
+                position: relative;
+            }
+            
+            /* Mobile navigation styles */
+            .nav-links.active {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 250px;
+                background-color: var(--card-bg);
+                border-radius: 0 0 10px 10px;
+                box-shadow: var(--card-shadow);
+                padding: 20px;
+                z-index: 1000;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links.active a {
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active a:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-links.active a:hover {
+                color: var(--primary);
+                padding-left: 10px;
+            }
+        }
+        
+        /* Touch-friendly mobile styles */
+        @media (max-width: 480px) {
+            .menu-btn {
+                padding: 10px;
+                margin: -10px;
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .nav-links.active {
+                width: calc(100vw - 40px);
+                right: -20px;
+                left: 20px;
+            }
+            
+            .nav-links.active a {
+                font-size: 1.1rem;
+                padding: 15px 0;
             }
         }
         
@@ -1837,6 +1908,22 @@
                 </div>
                 <div class="project-card fade-in delay-1">
                     <div class="project-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Website Rental PlayStation</h3>
+                        <p>Membuat UI Responsif dengan Desain Antarmuka Modern dan pengalaman pengguna yang dioptimalkan untuk layanan rental PlayStation.</p>
+                        <div class="project-tags">
+                            <div class="project-tag">HTML</div>
+                            <div class="project-tag">CSS</div>
+                            <div class="project-tag">JavaScript</div>
+                            <div class="project-tag">Responsive Design</div>
+                            <div class="project-tag">UI/UX</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in delay-2">
+                    <div class="project-img">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="project-content">
@@ -1849,7 +1936,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card fade-in delay-2">
+                <div class="project-card fade-in delay-3">
                     <div class="project-img">
                         <i class="fas fa-code"></i>
                     </div>
@@ -1882,38 +1969,40 @@
                 <button class="filter-btn" data-filter="backend">Back-End</button>
             </div>
             <div class="certificates-grid">
-                <div class="certificate-card fade-in" data-category="dicoding">
+                <!-- Udemy Certificates -->
+                <div class="certificate-card fade-in" data-category="udemy frontend">
                     <div class="certificate-img">
-                        <i class="fas fa-certificate"></i>
+                        <i class="fab fa-html5"></i>
                     </div>
                     <div class="certificate-content">
-                        <h3>Financial Literacy 101</h3>
-                        <p>Kelas tentang literasi finansial yang mengajarkan konsep pengelolaan keuangan dan investasi.</p>
+                        <h3>Become HTML Hero</h3>
+                        <p>Kursus Udemy tentang HTML yang mengajarkan cara membuat struktur website modern dengan penerapan praktik terbaik.</p>
                         <div class="certificate-footer">
                             <div class="certificate-date">
                                 <i class="far fa-calendar-alt"></i> Mei 2025
                             </div>
-                            <a href="https://dicoding.com/certificates/L4PQEVDO2PO1" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                            <a href="https://ude.my/UC-5b5f101d-f0a6-441d-bea2-ee075a969a49" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="certificate-card fade-in delay-1" data-category="dicoding backend">
+                
+                <div class="certificate-card fade-in delay-1" data-category="udemy frontend">
                     <div class="certificate-img">
-                        <i class="fas fa-server"></i>
+                        <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="certificate-content">
-                        <h3>Belajar Back-End Pemula dengan JavaScript</h3>
-                        <p>Kelas pengembangan back-end dengan JavaScript menggunakan Node.js dan framework Hapi.</p>
+                        <h3>Web Design: Building Stunning Websites on Smartphones</h3>
+                        <p>Kursus Udemy tentang desain responsif untuk perangkat mobile dengan fokus pada pengalaman pengguna.</p>
                         <div class="certificate-footer">
                             <div class="certificate-date">
                                 <i class="far fa-calendar-alt"></i> Mei 2025
                             </div>
-                            <a href="https://dicoding.com/certificates/81P2LR9WYZOY" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                            <a href="https://ude.my/UC-32833544-655c-4256-bb98-c025d7a321d8" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
                         </div>
                     </div>
                 </div>
 
+                <!-- Dicoding Certificates -->
                 <div class="certificate-card fade-in delay-2" data-category="dicoding frontend">
                     <div class="certificate-img">
                         <i class="fas fa-laptop-code"></i>
@@ -1994,71 +2083,22 @@
                     </div>
                 </div>
 
-                <div class="certificate-card fade-in delay-1" data-category="dicoding">
+                <div class="certificate-card fade-in delay-1" data-category="dicoding backend">
                     <div class="certificate-img">
-                        <i class="fas fa-brain"></i>
+                        <i class="fas fa-server"></i>
                     </div>
                     <div class="certificate-content">
-                        <h3>Pengenalan ke Logika Pemrograman</h3>
-                        <p>Kelas yang mengajarkan dasar-dasar logika pemrograman dan computational thinking.</p>
+                        <h3>Belajar Back-End Pemula dengan JavaScript</h3>
+                        <p>Kelas pengembangan back-end dengan JavaScript menggunakan Node.js dan framework Hapi untuk membuat RESTful API.</p>
                         <div class="certificate-footer">
                             <div class="certificate-date">
-                                <i class="far fa-calendar-alt"></i> Februari 2025
+                                <i class="far fa-calendar-alt"></i> Mei 2025
                             </div>
-                            <a href="https://dicoding.com/certificates/0LZ0R6RE3P65" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                            <a href="https://dicoding.com/certificates/81P2LR9WYZOY" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="certificate-card fade-in delay-2" data-category="dicoding">
-                    <div class="certificate-img">
-                        <i class="fas fa-keyboard"></i>
-                    </div>
-                    <div class="certificate-content">
-                        <h3>Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h3>
-                        <p>Kelas yang mengajarkan dasar-dasar pemrograman untuk pengembangan perangkat lunak.</p>
-                        <div class="certificate-footer">
-                            <div class="certificate-date">
-                                <i class="far fa-calendar-alt"></i> Februari 2025
-                            </div>
-                            <a href="https://dicoding.com/certificates/EYX4G01M6ZDL" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Udemy Certificates -->
-                <div class="certificate-card fade-in" data-category="udemy frontend">
-                    <div class="certificate-img">
-                        <i class="fab fa-html5"></i>
-                    </div>
-                    <div class="certificate-content">
-                        <h3>Become HTML Hero</h3>
-                        <p>Kursus Udemy tentang HTML yang mengajarkan cara membuat struktur website modern dengan penerapan praktik terbaik.</p>
-                        <div class="certificate-footer">
-                            <div class="certificate-date">
-                                <i class="far fa-calendar-alt"></i> Mei 2025
-                            </div>
-                            <a href="https://ude.my/UC-5b5f101d-f0a6-441d-bea2-ee075a969a49" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="certificate-card fade-in delay-1" data-category="udemy frontend">
-                    <div class="certificate-img">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="certificate-content">
-                        <h3>Web Design: Building Stunning Websites on Smartphones</h3>
-                        <p>Kursus Udemy tentang desain responsif untuk perangkat mobile dengan fokus pada pengalaman pengguna.</p>
-                        <div class="certificate-footer">
-                            <div class="certificate-date">
-                                <i class="far fa-calendar-alt"></i> Mei 2025
-                            </div>
-                            <a href="https://ude.my/UC-32833544-655c-4256-bb98-c025d7a321d8" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="certificate-card fade-in delay-2" data-category="udemy backend">
                     <div class="certificate-img">
                         <i class="fab fa-php"></i>
@@ -2071,6 +2111,22 @@
                                 <i class="far fa-calendar-alt"></i> Mei 2025
                             </div>
                             <a href="https://ude.my/UC-c9a85ec4-5584-4369-85c9-491ad4dbe92b" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-card fade-in" data-category="dicoding">
+                    <div class="certificate-img">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="certificate-content">
+                        <h3>Memulai Dasar Pemrograman untuk Menjadi Pengembang Software</h3>
+                        <p>Kelas yang mengajarkan dasar-dasar pemrograman untuk pengembangan perangkat lunak.</p>
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <i class="far fa-calendar-alt"></i> Februari 2025
+                            </div>
+                            <a href="https://dicoding.com/certificates/EYX4G01M6ZDL" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
                         </div>
                     </div>
                 </div>
@@ -2484,7 +2540,7 @@
             
             cards.forEach(card => {
                 // Handle the 'all' filter case
-                if (filter === 'all') {
+                if (filter === 'all') {  
                     // Show all cards with staggered animation
                     setTimeout(() => {
                         showCard(card);
@@ -2552,8 +2608,8 @@
             
             // Add counter items
             const counters = [
-                { icon: 'fas fa-certificate', count: 12, label: 'Sertifikat' },
-                { icon: 'fas fa-laptop-code', count: 15, label: 'Proyek' },
+                { icon: 'fas fa-certificate', count: 10, label: 'Sertifikat' },
+                { icon: 'fas fa-laptop-code', count: 4, label: 'Proyek' },
                 { icon: 'fas fa-user-graduate', count: 5, label: 'Teknologi Dikuasai' }
             ];
             
@@ -2813,8 +2869,10 @@
             // Add counter section
             addCounterSection();
             
-            // Enhance navbar
-            enhanceNavbar();
+            // Enhance navbar - IMPORTANT: Initialize this last
+            setTimeout(() => {
+                enhanceNavbar();
+            }, 100);
         });
 
         // Animation on Scroll with enhanced effects
@@ -2857,6 +2915,8 @@
         function enhanceNavbar() {
             const nav = document.querySelector('nav');
             const navHeight = nav.offsetHeight;
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinksContainer = document.querySelector('.nav-links');
             
             // Shrink navbar on scroll with smooth animation
             window.addEventListener('scroll', function() {
@@ -2897,8 +2957,12 @@
                         history.pushState(null, null, targetId);
                         
                         // Close mobile menu if open
-                        if (navLinks.classList.contains('active')) {
-                            menuBtn.click();
+                        if (navLinksContainer && navLinksContainer.classList.contains('active')) {
+                            navLinksContainer.classList.remove('active');
+                            if (menuBtn) {
+                                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                                menuBtn.setAttribute('aria-expanded', 'false');
+                            }
                         }
                         
                         // Update active nav link with animation
@@ -2939,45 +3003,67 @@
             });
             
             // Mobile menu toggle with enhanced animation
-            if (menuBtn) {
+            if (menuBtn && navLinksContainer) {
                 menuBtn.setAttribute('aria-label', 'Toggle navigation menu');
                 menuBtn.setAttribute('role', 'button');
                 menuBtn.setAttribute('tabindex', '0');
+                menuBtn.setAttribute('aria-expanded', 'false');
                 
-                menuBtn.addEventListener('click', function() {
-                    const navLinks = document.querySelector('.nav-links');
+                // Ensure menu starts closed
+                navLinksContainer.classList.remove('active');
+                
+                menuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     
                     // Toggle menu visibility
-                    navLinks.classList.toggle('active');
+                    const isActive = navLinksContainer.classList.contains('active');
                     
-                    // Update ARIA attributes
-                    const expanded = navLinks.classList.contains('active');
-                    this.setAttribute('aria-expanded', expanded);
-                    
-                    // Toggle menu icon with rotation animation
-                    if (expanded) {
-                        this.innerHTML = '<i class="fas fa-times" style="animation: rotate 0.3s forwards;"></i>';
+                    if (isActive) {
+                        // Close menu
+                        navLinksContainer.classList.remove('active');
+                        this.setAttribute('aria-expanded', 'false');
+                        this.innerHTML = '<i class="fas fa-bars"></i>';
+                        
+                        // Reset styles
+                        navLinksContainer.style.display = '';
+                        navLinksContainer.style.position = '';
+                        navLinksContainer.style.top = '';
+                        navLinksContainer.style.right = '';
+                        navLinksContainer.style.backgroundColor = '';
+                        navLinksContainer.style.padding = '';
+                        navLinksContainer.style.boxShadow = '';
+                        navLinksContainer.style.borderRadius = '';
+                        navLinksContainer.style.width = '';
+                        navLinksContainer.style.zIndex = '';
+                        navLinksContainer.style.flexDirection = '';
+                        
+                        // Reset link styles
+                        const links = navLinksContainer.querySelectorAll('a');
+                        links.forEach(link => {
+                            link.style = '';
+                        });
                     } else {
-                        this.innerHTML = '<i class="fas fa-bars" style="animation: rotate 0.3s forwards;"></i>';
-                    }
-                    
-                    // Apply slide animation
-                    if (expanded) {
-                        navLinks.style.display = 'flex';
-                        navLinks.style.flexDirection = 'column';
-                        navLinks.style.position = 'absolute';
-                        navLinks.style.top = `${navHeight}px`;
-                        navLinks.style.right = '0';
-                        navLinks.style.backgroundColor = 'var(--card-bg)';
-                        navLinks.style.padding = '20px';
-                        navLinks.style.boxShadow = 'var(--card-shadow)';
-                        navLinks.style.borderRadius = '0 0 10px 10px';
-                        navLinks.style.width = '200px';
-                        navLinks.style.animation = 'slideIn 0.3s ease forwards';
-                        navLinks.style.zIndex = '1000';
+                        // Open menu
+                        navLinksContainer.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                        this.innerHTML = '<i class="fas fa-times"></i>';
+                        
+                        // Apply mobile menu styles
+                        navLinksContainer.style.display = 'flex';
+                        navLinksContainer.style.flexDirection = 'column';
+                        navLinksContainer.style.position = 'absolute';
+                        navLinksContainer.style.top = `${navHeight}px`;
+                        navLinksContainer.style.right = '0';
+                        navLinksContainer.style.backgroundColor = 'var(--card-bg)';
+                        navLinksContainer.style.padding = '20px';
+                        navLinksContainer.style.boxShadow = 'var(--card-shadow)';
+                        navLinksContainer.style.borderRadius = '0 0 10px 10px';
+                        navLinksContainer.style.width = '200px';
+                        navLinksContainer.style.zIndex = '1000';
                         
                         // Animate each link with staggered delay
-                        const links = navLinks.querySelectorAll('a');
+                        const links = navLinksContainer.querySelectorAll('a');
                         links.forEach((link, index) => {
                             link.style.opacity = '0';
                             link.style.transform = 'translateX(20px)';
@@ -2989,41 +3075,44 @@
                                 link.style.transform = 'translateX(0)';
                             }, 100);
                         });
-                    } else {
-                        navLinks.style.animation = 'slideOut 0.3s ease forwards';
-                        
-                        // Fade out links in reverse order
-                        const links = navLinks.querySelectorAll('a');
-                        [...links].reverse().forEach((link, index) => {
-                            link.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-                            link.style.transitionDelay = `${0.05 * index}s`;
-                            link.style.opacity = '0';
-                            link.style.transform = 'translateX(20px)';
-                        });
-                        
-                        setTimeout(() => {
-                            if (!navLinks.classList.contains('active')) {
-                                navLinks.style.display = '';
-                                
-                                // Reset link styles
-                                links.forEach(link => {
-                                    link.style = '';
-                                });
-                            }
-                        }, 300);
                     }
                 });
                 
                 // Close mobile menu when clicking outside
                 document.addEventListener('click', function(e) {
-                    const navLinks = document.querySelector('.nav-links');
-                    if (navLinks.classList.contains('active') && 
-                        !navLinks.contains(e.target) && 
-                        e.target !== menuBtn && 
+                    if (navLinksContainer.classList.contains('active') && 
+                        !navLinksContainer.contains(e.target) && 
                         !menuBtn.contains(e.target)) {
                         
-                        menuBtn.click();
+                        navLinksContainer.classList.remove('active');
+                        menuBtn.setAttribute('aria-expanded', 'false');
+                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        
+                        // Reset styles
+                        navLinksContainer.style.display = '';
+                        navLinksContainer.style.position = '';
+                        navLinksContainer.style.top = '';
+                        navLinksContainer.style.right = '';
+                        navLinksContainer.style.backgroundColor = '';
+                        navLinksContainer.style.padding = '';
+                        navLinksContainer.style.boxShadow = '';
+                        navLinksContainer.style.borderRadius = '';
+                        navLinksContainer.style.width = '';
+                        navLinksContainer.style.zIndex = '';
+                        navLinksContainer.style.flexDirection = '';
+                        
+                        // Reset link styles
+                        const links = navLinksContainer.querySelectorAll('a');
+                        links.forEach(link => {
+                            link.style = '';
+                        });
                     }
+                });
+                
+                // Add touch event for mobile devices
+                menuBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.click();
                 });
                 
                 // Add keyboard accessibility
