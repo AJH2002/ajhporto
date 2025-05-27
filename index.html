@@ -115,7 +115,6 @@
             font-size: 3rem;
             margin-bottom: 20px;
             font-weight: 700;
-            /* Letter animation */
             display: inline-block;
             animation: textShadowPulse 2s infinite;
         }
@@ -1516,7 +1515,7 @@
             }
             
             .custom-cursor, .cursor-dot {
-                display: none; /* Hide custom cursor on mobile */
+                display: none;
             }
         }
         
@@ -1530,15 +1529,34 @@
             }
             
             .menu-btn {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                padding: 12px;
+                border-radius: 8px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
                 z-index: 1001;
                 position: relative;
+                transition: all 0.3s ease;
+                color: var(--text-color);
             }
             
             .menu-btn:hover {
                 background-color: rgba(58, 134, 255, 0.1);
-                border-radius: 5px;
-                padding: 5px;
+                transform: scale(1.05);
+            }
+            
+            .menu-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .menu-btn i {
+                font-size: 1.4rem;
+                transition: all 0.3s ease;
             }
             
             .service-card {
@@ -1560,60 +1578,265 @@
             
             .nav-container {
                 position: relative;
+                padding: 15px 0;
             }
             
             /* Mobile navigation styles */
             .nav-links.active {
                 position: absolute;
-                top: 100%;
+                top: calc(100% + 5px);
                 right: 0;
-                width: 250px;
+                width: 280px;
+                max-width: calc(100vw - 40px);
                 background-color: var(--card-bg);
-                border-radius: 0 0 10px 10px;
-                box-shadow: var(--card-shadow);
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
                 padding: 20px;
                 z-index: 1000;
                 flex-direction: column;
-                gap: 15px;
+                gap: 5px;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
+                animation: slideDown 0.3s ease forwards;
+            }
+            
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            [data-theme="dark"] .nav-links.active {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             }
             
             .nav-links.active a {
-                padding: 10px 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                padding: 12px 16px;
+                border-radius: 8px;
                 transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                position: relative;
+                overflow: hidden;
             }
             
-            .nav-links.active a:last-child {
-                border-bottom: none;
+            .nav-links.active a::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 0;
+                height: 100%;
+                background: linear-gradient(90deg, var(--primary), var(--secondary));
+                transition: width 0.3s ease;
+                z-index: -1;
+                opacity: 0.1;
             }
             
             .nav-links.active a:hover {
                 color: var(--primary);
-                padding-left: 10px;
+                background-color: rgba(58, 134, 255, 0.05);
+                transform: translateX(5px);
+            }
+            
+            .nav-links.active a:hover::before {
+                width: 100%;
+            }
+            
+            .nav-links.active a:active {
+                transform: translateX(2px) scale(0.98);
+            }
+            
+            /* Header responsive */
+            .header-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
+            /* About section responsive */
+            .about-content {
+                gap: 30px;
+            }
+            
+            /* Skills grid responsive */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            /* Certificate filter responsive */
+            .certificate-filter {
+                gap: 8px;
+                margin-bottom: 30px;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
         }
         
         /* Touch-friendly mobile styles */
         @media (max-width: 480px) {
             .menu-btn {
+                width: 40px;
+                height: 40px;
                 padding: 10px;
-                margin: -10px;
-                min-width: 44px;
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+            }
+            
+            .menu-btn i {
+                font-size: 1.2rem;
             }
             
             .nav-links.active {
-                width: calc(100vw - 40px);
-                right: -20px;
-                left: 20px;
+                width: calc(100vw - 30px);
+                right: 15px;
+                left: 15px;
+                margin-right: -15px;
             }
             
             .nav-links.active a {
-                font-size: 1.1rem;
-                padding: 15px 0;
+                font-size: 1rem;
+                padding: 14px 16px;
+            }
+            
+            /* Header mobile adjustments */
+            .header-text h1 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .header-text p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 14px 20px;
+            }
+            
+            .btn-cv {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            /* Section titles mobile */
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            /* Contact form mobile */
+            .contact-content {
+                gap: 30px;
+            }
+            
+            /* Certificate cards mobile spacing */
+            .certificates-grid {
+                gap: 20px;
+            }
+            
+            /* Service cards mobile */
+            .service-card {
+                padding: 25px 20px;
+            }
+            
+            .service-icon {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            /* Project cards mobile */
+            .project-img {
+                height: 180px;
+            }
+            
+            /* Skills section mobile */
+            .skills {
+                gap: 8px;
+            }
+            
+            .skill-tag {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            /* Counter section mobile */
+            .counter-section {
+                padding: 40px 0;
+            }
+            
+            .counter-item {
+                padding: 15px;
+            }
+            
+            .counter-item i {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .counter-value {
+                font-size: 2rem;
+            }
+            
+            .counter-label {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .nav-links.active {
+                width: calc(100vw - 20px);
+                right: 10px;
+                left: 10px;
+                margin-right: -10px;
+                padding: 15px;
+            }
+            
+            .header-text h1 {
+                font-size: 1.6rem;
+            }
+            
+            .profile-img {
+                width: 180px;
+                height: 180px;
+                font-size: 4rem;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
             }
         }
         
@@ -2126,7 +2349,7 @@
                             <div class="certificate-date">
                                 <i class="far fa-calendar-alt"></i> Februari 2025
                             </div>
-                            <a href="https://dicoding.com/certificates/EYX4G01M6ZDL" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
+                            <a href="https://ude.my/UC-c9a85ec4-5584-4369-85c9-491ad4dbe92b" class="btn btn-certificate" target="_blank">Lihat Sertifikat</a>
                         </div>
                     </div>
                 </div>
@@ -2609,8 +2832,7 @@
             // Add counter items
             const counters = [
                 { icon: 'fas fa-certificate', count: 10, label: 'Sertifikat' },
-                { icon: 'fas fa-laptop-code', count: 4, label: 'Proyek' },
-                { icon: 'fas fa-user-graduate', count: 5, label: 'Teknologi Dikuasai' }
+                { icon: 'fas fa-laptop-code', count: 4, label: 'Proyek' }
             ];
             
             // Create container
@@ -3012,6 +3234,36 @@
                 // Ensure menu starts closed
                 navLinksContainer.classList.remove('active');
                 
+                // Function to close menu
+                function closeMenu() {
+                    navLinksContainer.classList.remove('active');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = ''; // Re-enable scrolling
+                }
+                
+                // Function to open menu
+                function openMenu() {
+                    navLinksContainer.classList.add('active');
+                    menuBtn.setAttribute('aria-expanded', 'true');
+                    menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    
+                    // Animate each link with staggered delay
+                    const links = navLinksContainer.querySelectorAll('a');
+                    links.forEach((link, index) => {
+                        link.style.opacity = '0';
+                        link.style.transform = 'translateX(20px)';
+                        link.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        link.style.transitionDelay = `${0.1 + (index * 0.05)}s`;
+                        
+                        setTimeout(() => {
+                            link.style.opacity = '1';
+                            link.style.transform = 'translateX(0)';
+                        }, 50);
+                    });
+                }
+                
                 menuBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -3020,61 +3272,9 @@
                     const isActive = navLinksContainer.classList.contains('active');
                     
                     if (isActive) {
-                        // Close menu
-                        navLinksContainer.classList.remove('active');
-                        this.setAttribute('aria-expanded', 'false');
-                        this.innerHTML = '<i class="fas fa-bars"></i>';
-                        
-                        // Reset styles
-                        navLinksContainer.style.display = '';
-                        navLinksContainer.style.position = '';
-                        navLinksContainer.style.top = '';
-                        navLinksContainer.style.right = '';
-                        navLinksContainer.style.backgroundColor = '';
-                        navLinksContainer.style.padding = '';
-                        navLinksContainer.style.boxShadow = '';
-                        navLinksContainer.style.borderRadius = '';
-                        navLinksContainer.style.width = '';
-                        navLinksContainer.style.zIndex = '';
-                        navLinksContainer.style.flexDirection = '';
-                        
-                        // Reset link styles
-                        const links = navLinksContainer.querySelectorAll('a');
-                        links.forEach(link => {
-                            link.style = '';
-                        });
+                        closeMenu();
                     } else {
-                        // Open menu
-                        navLinksContainer.classList.add('active');
-                        this.setAttribute('aria-expanded', 'true');
-                        this.innerHTML = '<i class="fas fa-times"></i>';
-                        
-                        // Apply mobile menu styles
-                        navLinksContainer.style.display = 'flex';
-                        navLinksContainer.style.flexDirection = 'column';
-                        navLinksContainer.style.position = 'absolute';
-                        navLinksContainer.style.top = `${navHeight}px`;
-                        navLinksContainer.style.right = '0';
-                        navLinksContainer.style.backgroundColor = 'var(--card-bg)';
-                        navLinksContainer.style.padding = '20px';
-                        navLinksContainer.style.boxShadow = 'var(--card-shadow)';
-                        navLinksContainer.style.borderRadius = '0 0 10px 10px';
-                        navLinksContainer.style.width = '200px';
-                        navLinksContainer.style.zIndex = '1000';
-                        
-                        // Animate each link with staggered delay
-                        const links = navLinksContainer.querySelectorAll('a');
-                        links.forEach((link, index) => {
-                            link.style.opacity = '0';
-                            link.style.transform = 'translateX(20px)';
-                            link.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            link.style.transitionDelay = `${0.1 + (index * 0.07)}s`;
-                            
-                            setTimeout(() => {
-                                link.style.opacity = '1';
-                                link.style.transform = 'translateX(0)';
-                            }, 100);
-                        });
+                        openMenu();
                     }
                 });
                 
@@ -3083,36 +3283,30 @@
                     if (navLinksContainer.classList.contains('active') && 
                         !navLinksContainer.contains(e.target) && 
                         !menuBtn.contains(e.target)) {
-                        
-                        navLinksContainer.classList.remove('active');
-                        menuBtn.setAttribute('aria-expanded', 'false');
-                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                        
-                        // Reset styles
-                        navLinksContainer.style.display = '';
-                        navLinksContainer.style.position = '';
-                        navLinksContainer.style.top = '';
-                        navLinksContainer.style.right = '';
-                        navLinksContainer.style.backgroundColor = '';
-                        navLinksContainer.style.padding = '';
-                        navLinksContainer.style.boxShadow = '';
-                        navLinksContainer.style.borderRadius = '';
-                        navLinksContainer.style.width = '';
-                        navLinksContainer.style.zIndex = '';
-                        navLinksContainer.style.flexDirection = '';
-                        
-                        // Reset link styles
-                        const links = navLinksContainer.querySelectorAll('a');
-                        links.forEach(link => {
-                            link.style = '';
-                        });
+                        closeMenu();
+                    }
+                });
+                
+                // Close menu when clicking on a nav link
+                navLinksContainer.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                        // Add a small delay to allow the smooth scroll to start
+                        setTimeout(() => {
+                            closeMenu();
+                        }, 300);
+                    }
+                });
+                
+                // Close menu on window resize if open
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && navLinksContainer.classList.contains('active')) {
+                        closeMenu();
                     }
                 });
                 
                 // Add touch event for mobile devices
                 menuBtn.addEventListener('touchstart', function(e) {
                     e.preventDefault();
-                    this.click();
                 });
                 
                 // Add keyboard accessibility
@@ -3120,6 +3314,17 @@
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
                         this.click();
+                    }
+                    
+                    if (e.key === 'Escape' && navLinksContainer.classList.contains('active')) {
+                        closeMenu();
+                    }
+                });
+                
+                // Close menu with Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && navLinksContainer.classList.contains('active')) {
+                        closeMenu();
                     }
                 });
             }
